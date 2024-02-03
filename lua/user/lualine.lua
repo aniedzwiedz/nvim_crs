@@ -14,7 +14,7 @@ function M.config()
     "diagnostics",
     sections = { "error", "warn" },
     colored = true, -- Displays diagnostics status in color if set to true.
-    always_visible = true, -- Show diagnostics even if there are none.
+    always_visible = false, -- Show diagnostics even if there are none.
   }
 
   local filetype = {
@@ -68,7 +68,9 @@ function M.config()
       -- lualine_z = { "progress" },
       -- lualine_a = { "mode" },
       lualine_a = {},
-      lualine_b = { { "branch", icon = { "", align = "right" } } },
+      -- lualine_a = { "FugitiveHead" },
+
+      lualine_b = { { "FugitiveHead", icon = { "", align = "right" } } },
       -- lualine_c = { diagnostics },
       -- lualine_c = { diff },
       lualine_c = {

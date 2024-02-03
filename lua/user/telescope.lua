@@ -73,10 +73,10 @@ function M.config()
       selection_strategy = "reset",
       path_display = { "smart" },
       color_devicons = true,
-      set_env = { ["COLORTERM"] = "truecolor" },
-      sorting_strategy = nil,
-      layout_strategy = nil,
-      layout_config = {},
+      -- set_env = { ["COLORTERM"] = "truecolor" },
+      sorting_strategy = "ascending",
+      layout_strategy = "vertical",
+      layout_config = { prompt_position = "top", vertical = { width = 0.85 } },
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -106,19 +106,19 @@ function M.config()
       },
     },
     pickers = {
-      live_grep = {
-        theme = "dropdown",
-      },
+      -- live_grep = {
+      --   theme = "dropdown",
+      -- },
 
-      grep_string = {
-        theme = "dropdown",
-      },
+      -- grep_string = {
+      --   theme = "dropdown",
+      -- },
 
-      find_files = {
-        theme = "dropdown",
-        previewer = false,
-        path_display = filenameFirst,
-      },
+      -- find_files = {
+      --   theme = "dropdown",
+      --   previewer = false,
+      --   path_display = filenameFirst,
+      -- },
 
       buffers = {
         theme = "dropdown",
