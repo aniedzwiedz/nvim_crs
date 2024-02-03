@@ -71,6 +71,9 @@ function M.config()
         luasnip.lsp_expand(args.body) -- For `luasnip` users.
       end,
     },
+    completion = {
+      completeopt = "menu,menuone,preview,noselect",
+    },
     mapping = cmp.mapping.preset.insert {
       ["<C-k>"] = cmp.mapping(
         cmp.mapping.select_prev_item { behavior = types.cmp.SelectBehavior.Select },
@@ -136,17 +139,17 @@ function M.config()
         "s",
       }),
     },
+---@diagnostic disable-next-line: missing-fields
     formatting = {
       fields = { "kind", "abbr", "menu" },
       format = function(entry, vim_item)
         vim_item.kind = icons.kind[vim_item.kind]
         vim_item.menu = ({
-          nvim_lsp = "",
-          nvim_lua = "",
-          luasnip = "",
-          buffer = "",
-          path = "",
-          emoji = "",
+          nvim_lsp = "nvim_lsp",
+          nvim_lua = "nvim_lua",
+          luasnip = "luasnip",
+          buffer = "buffer",
+          path = "path",
         })[entry.source.name]
 
         if vim.tbl_contains({ "nvim_lsp" }, entry.source.name) then
@@ -162,109 +165,110 @@ function M.config()
           vim_item.dup = duplicates[entry.source.name] or duplicates_default
         end
 
-        if vim.tbl_contains({ "nvim_lsp" }, entry.source.name) then
-          local words = {}
-          for word in string.gmatch(vim_item.word, "[^-]+") do
-            table.insert(words, word)
-          end
+            -- if vim.tbl_contains({ "nvim_lsp" }, entry.source.name) then
+            --   local words = {}
+            --   for word in string.gmatch(vim_item.word, "[^-]+") do
+            --     table.insert(words, word)
+            --   end
+            --
+            --   local color_name, color_number
+            --   if
+            --     words[2] == "x"
+            --     or words[2] == "y"
+            --     or words[2] == "t"
+            --     or words[2] == "b"
+            --     or words[2] == "l"
+            --     or words[2] == "r"
+            --   then
+            --     color_name = words[3]
+            --     color_number = words[4]
+            --   else
+            --     color_name = words[2]
+            --     color_number = words[3]
+            --   end
+            --
+            --   if color_name == "white" or color_name == "black" then
+            --     local color
+            --     if color_name == "white" then
+            --       color = "ffffff"
+            --     else
+            --       color = "000000"
+            --     end
+            --
+            --     local hl_group = "lsp_documentColor_mf_" .. color
+            --     -- vim.api.nvim_set_hl(0, hl_group, { fg = "#" .. color, bg = "#" .. color })
+            --     vim.api.nvim_set_hl(0, hl_group, { fg = "#" .. color, bg = "NONE" })
+            --     vim_item.kind_hl_group = hl_group
+            --
+            --     -- make the color square 2 chars wide
+            --     vim_item.kind = string.rep("▣", 1)
+            --
+            --     return vim_item
+            --   elseif #words < 3 or #words > 4 then
+            --     -- doesn't look like this is a tailwind css color
+            --     return vim_item
+            --   end
+            --
+            --   if not color_name or not color_number then
+            --     return vim_item
+            --   end
+            --
+            --   local color_index = tonumber(color_number)
+            --   local tailwindcss_colors = require("tailwindcss-colorizer-cmp.colors").TailwindcssColors
+            --
+            --   if not tailwindcss_colors[color_name] then
+            --     return vim_item
+            --   end
+            --
+            --   if not tailwindcss_colors[color_name][color_index] then
+            --     return vim_item
+            --   end
+            --
+            --   local color = tailwindcss_colors[color_name][color_index]
+            --
+            --   local hl_group = "lsp_documentColor_mf_" .. color
+            --   -- vim.api.nvim_set_hl(0, hl_group, { fg = "#" .. color, bg = "#" .. color })
+            --   vim.api.nvim_set_hl(0, hl_group, { fg = "#" .. color, bg = "NONE" })
+            --
+            --   vim_item.kind_hl_group = hl_group
+            --
+            --   -- make the color square 2 chars wide
+            --   vim_item.kind = string.rep("▣", 1)
+            --
+            --   -- return vim_item
+            -- end
 
-          local color_name, color_number
-          if
-            words[2] == "x"
-            or words[2] == "y"
-            or words[2] == "t"
-            or words[2] == "b"
-            or words[2] == "l"
-            or words[2] == "r"
-          then
-            color_name = words[3]
-            color_number = words[4]
-          else
-            color_name = words[2]
-            color_number = words[3]
-          end
-
-          if color_name == "white" or color_name == "black" then
-            local color
-            if color_name == "white" then
-              color = "ffffff"
-            else
-              color = "000000"
-            end
-
-            local hl_group = "lsp_documentColor_mf_" .. color
-            -- vim.api.nvim_set_hl(0, hl_group, { fg = "#" .. color, bg = "#" .. color })
-            vim.api.nvim_set_hl(0, hl_group, { fg = "#" .. color, bg = "NONE" })
-            vim_item.kind_hl_group = hl_group
-
-            -- make the color square 2 chars wide
-            vim_item.kind = string.rep("▣", 1)
-
-            return vim_item
-          elseif #words < 3 or #words > 4 then
-            -- doesn't look like this is a tailwind css color
-            return vim_item
-          end
-
-          if not color_name or not color_number then
-            return vim_item
-          end
-
-          local color_index = tonumber(color_number)
-          local tailwindcss_colors = require("tailwindcss-colorizer-cmp.colors").TailwindcssColors
-
-          if not tailwindcss_colors[color_name] then
-            return vim_item
-          end
-
-          if not tailwindcss_colors[color_name][color_index] then
-            return vim_item
-          end
-
-          local color = tailwindcss_colors[color_name][color_index]
-
-          local hl_group = "lsp_documentColor_mf_" .. color
-          -- vim.api.nvim_set_hl(0, hl_group, { fg = "#" .. color, bg = "#" .. color })
-          vim.api.nvim_set_hl(0, hl_group, { fg = "#" .. color, bg = "NONE" })
-
-          vim_item.kind_hl_group = hl_group
-
-          -- make the color square 2 chars wide
-          vim_item.kind = string.rep("▣", 1)
-
-          -- return vim_item
-        end
-
-        if entry.source.name == "copilot" then
-          vim_item.kind = icons.git.Octoface
-          vim_item.kind_hl_group = "CmpItemKindCopilot"
-        end
-
-        if entry.source.name == "cmp_tabnine" then
-          vim_item.kind = icons.misc.Robot
-          vim_item.kind_hl_group = "CmpItemKindTabnine"
-        end
-
-        if entry.source.name == "crates" then
-          vim_item.kind = icons.misc.Package
-          vim_item.kind_hl_group = "CmpItemKindCrate"
-        end
-
-        if entry.source.name == "lab.quick_data" then
-          vim_item.kind = icons.misc.CircuitBoard
-          vim_item.kind_hl_group = "CmpItemKindConstant"
-        end
-
-        if entry.source.name == "emoji" then
-          vim_item.kind = icons.misc.Smiley
-          vim_item.kind_hl_group = "CmpItemKindEmoji"
-        end
+            -- if entry.source.name == "copilot" then
+            --   vim_item.kind = icons.git.Octoface
+            --   vim_item.kind_hl_group = "CmpItemKindCopilot"
+            -- end
+            --
+            -- if entry.source.name == "cmp_tabnine" then
+            --   vim_item.kind = icons.misc.Robot
+            --   vim_item.kind_hl_group = "CmpItemKindTabnine"
+            -- end
+            --
+            -- if entry.source.name == "crates" then
+            --   vim_item.kind = icons.misc.Package
+            --   vim_item.kind_hl_group = "CmpItemKindCrate"
+            -- end
+            --
+            -- if entry.source.name == "lab.quick_data" then
+            --   vim_item.kind = icons.misc.CircuitBoard
+            --   vim_item.kind_hl_group = "CmpItemKindConstant"
+            -- end
+            --
+            -- if entry.source.name == "emoji" then
+            --   vim_item.kind = icons.misc.Smiley
+            --   vim_item.kind_hl_group = "CmpItemKindEmoji"
+            -- end
 
         return vim_item
       end,
     },
     sources = {
-      { name = "copilot" },
+      -- {name = "copilot" },
+      { name = "nvim_lsp", keyword_length = 3, max_item_count = 10 }, -- lsp
       {
         name = "nvim_lsp",
         entry_filter = function(entry, ctx)
@@ -284,16 +288,16 @@ function M.config()
           return true
         end,
       },
-      { name = "luasnip" },
+      { name = "luasnip", keyword_length = 3, max_item_count = 10 }, -- snippets
       { name = "cmp_tabnine" },
       { name = "nvim_lua" },
-      { name = "buffer" },
-      { name = "path" },
-      { name = "calc" },
-      { name = "emoji" },
+      { name = "buffer", keyword_length = 4, max_item_count = 10 }, -- text within current buffer
+      { name = "path", keyword_length = 4, max_item_count = 10 }, -- file system paths
+      -- { name = "calc" },
+      -- { name = "emoji" },
       { name = "treesitter" },
-      { name = "crates" },
-      { name = "tmux" },
+      -- { name = "crates" },
+      -- { name = "tmux" },
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,
@@ -305,7 +309,7 @@ function M.config()
         selection_order = "top_down",
       },
       docs = {
-        auto_open = false,
+        auto_open = true,
       },
     },
     window = {
@@ -323,7 +327,7 @@ function M.config()
       },
     },
     experimental = {
-      ghost_text = false,
+      ghost_text = true,
     },
   }
 

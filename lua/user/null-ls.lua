@@ -3,6 +3,13 @@ local M = {
 }
 
 function M.config()
+  require("fzf-lua").setup {
+    lsp = {
+      -- make lsp requests synchronous so they work with null-ls
+      async_or_timeout = 3000,
+    },
+  }
+
   local null_ls = require "null-ls"
 
   local formatting = null_ls.builtins.formatting
@@ -19,6 +26,10 @@ function M.config()
       -- formatting.eslint,
       -- null_ls.builtins.diagnostics.eslint,
       null_ls.builtins.completion.spell,
+      null_ls.builtins.diagnostics.gitlint,
+      null_ls.builtins.diagnostics.yamllint,
+      null_ls.builtins.diagnostics.jsonlint,
+
     },
   }
 end

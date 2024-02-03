@@ -15,6 +15,12 @@ function M.config()
   wk.register {
     ["<leader>Ti"] = { "<cmd>TSConfigInfo<CR>", "Info" },
   }
+  require("nvim-treesitter.configs").setup {
+    highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = false,
+    },
+  }
 
   require("nvim-treesitter.configs").setup {
     ensure_installed = { "lua", "markdown", "markdown_inline", "bash", "python" }, -- put the language you want in this array

@@ -1,6 +1,14 @@
 local M = {
   "neogitorg/neogit",
   event = "VeryLazy",
+  dependencies = {
+    "nvim-lua/plenary.nvim", -- required
+    "sindrets/diffview.nvim", -- optional - Diff integration
+
+    -- Only one of these is needed, not both.
+    "nvim-telescope/telescope.nvim", -- optional
+    "ibhagwan/fzf-lua", -- optional
+  },
 }
 
 function M.config()
@@ -38,6 +46,7 @@ function M.config()
       item = { icons.ui.ChevronRight, icons.ui.ChevronShortDown },
       hunk = { "", "" },
     },
+    graph_style = "unicode",
     integrations = {
       diffview = true,
     },

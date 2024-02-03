@@ -13,16 +13,17 @@ M.config = function()
     ["<leader>gp"] = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
     ["<leader>gr"] = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
     ["<leader>gl"] = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+    ["<leader>gL"] = { "<cmd>lua require 'gitsigns'.blame_line({ full = true })<cr>", "Blame Full view" },
     ["<leader>gR"] = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
     ["<leader>gs"] = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
     ["<leader>gu"] = {
       "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
       "Undo Stage Hunk",
     },
-    ["<leader>gd"] = {
-      "<cmd>Gitsigns diffthis HEAD<cr>",
-      "Git Diff",
-    },
+    -- ["<leader>gd"] = {
+    --   "<cmd>Gitsigns diffthis HEAD<cr>",
+    --   "Git Diff",
+    -- },
   }
 
   require("gitsigns").setup {

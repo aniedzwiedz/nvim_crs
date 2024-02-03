@@ -1,3 +1,6 @@
+
+if true then return {} end
+
 local M = {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",

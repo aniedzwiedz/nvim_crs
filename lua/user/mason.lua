@@ -28,9 +28,16 @@ function M.config()
     ["<leader>lI"] = { "<cmd>Mason<cr>", "Mason Info" },
   }
 
+  local icons = require "user.icons"
+
   require("mason").setup {
     ui = {
       border = "rounded",
+      icons = {
+        package_installed = icons.ui.Check,
+        package_pending = "➜",
+        package_uninstalled = icons.ui.Close,
+      },
     },
   }
   require("mason-lspconfig").setup {

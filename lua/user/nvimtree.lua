@@ -33,7 +33,7 @@ function M.config()
     hijack_netrw = false,
     sync_root_with_cwd = true,
     view = {
-      relativenumber = true,
+      number = false,
     },
     renderer = {
       add_trailing = false,

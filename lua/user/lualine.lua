@@ -2,21 +2,18 @@ local M = {
   "nvim-lualine/lualine.nvim",
   dependencies = {
     "AndreM222/copilot-lualine",
+    "nvim-tree/nvim-web-devicons", -- fancy icons
+    "linrongbin16/lsp-progress.nvim", -- LSP loading progress
   },
 }
 
 function M.config()
-  local icons = require "user.icons"
-  local diff = {
-    "diff",
-    colored = false,
-    symbols = { added = icons.git.LineAdded, modified = icons.git.LineModified, removed = icons.git.LineRemoved }, -- Changes the symbols used by the diff.
-  }
+  -- local icons = require "user.icons"
 
   local diagnostics = {
     "diagnostics",
     sections = { "error", "warn" },
-    colored = false, -- Displays diagnostics status in color if set to true.
+    colored = true, -- Displays diagnostics status in color if set to true.
     always_visible = true, -- Show diagnostics even if there are none.
   }
 
@@ -42,8 +39,17 @@ function M.config()
     end,
   }
 
+  -- local icons = require "user.icons"
+
   require("lualine").setup {
     options = {
+      theme = auto,
+      disabled_filetypes = { -- Filetypes to disable lualine for.
+        disabled_filetypes = {
+          statusline = { "dashboard", "alpha", "starter" },
+          winbar = {},
+        },
+      },
       -- component_separators = { left = "", right = "" },
       -- section_separators = { left = "", right = "" },
       -- component_separators = { left = "", right = "" },
@@ -62,10 +68,26 @@ function M.config()
       -- lualine_z = { "progress" },
       -- lualine_a = { "mode" },
       lualine_a = {},
-      lualine_b = { "branch" },
-      lualine_c = { diagnostics },
+      lualine_b = { { "branch", icon = { "", align = "right" } } },
+      -- lualine_c = { diagnostics },
+      -- lualine_c = { diff },
+      lualine_c = {
+        {
+          "diff",
+          symbols = {
+            -- added = icons.git.LineAdded,
+            -- modified = icons.git.LineModified,
+            -- removed = icons.git.LineRemoved,
+          },
+        },
+      },
+
       -- lualine_x = { diff, "copilot", filetype },
-      lualine_x = { "copilot", filetype },
+      lualine_x = {
+        "copilot",
+        diagnostics,
+        { "filetype", separator = " ", padding = { left = 1, right = 0 } },
+      },
       lualine_y = { "progress" },
       lualine_z = {},
     },
