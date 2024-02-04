@@ -13,7 +13,13 @@ function M.config()
     ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     ["<leader>fc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
     ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find files" },
-    ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+    -- ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+    ["<leader>fp"] = {
+      function()
+        require("telescope.builtin").find_files { cwd = require("lazy.core.config").options.root }
+      end,
+       "Find Plugin File",
+    },
     ["<leader>ft"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
     ["<leader>fs"] = { "<cmd>Telescope grep_string<cr>", "Find String" },
     ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help" },
