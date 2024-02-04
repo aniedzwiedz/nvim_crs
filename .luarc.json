@@ -1,0 +1,7 @@
+{
+    "diagnostics.globals": [
+        "vim",
+        "spec",
+        "add_count"
+    ]
+}

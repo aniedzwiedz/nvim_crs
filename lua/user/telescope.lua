@@ -21,11 +21,9 @@ function M.config()
        "Find Plugin File",
     },
     ["<leader>ft"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
-    ["<leader>fs"] = { "<cmd>Telescope grep_string<cr>", "Find String" },
-    ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help" },
+    ["<leader>fw"] = { "<cmd>Telescope grep_string<cr>", "Find Word Under Cursor" },
+    ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help Tags" },
     ["<leader>fH"] = { "<cmd>Telescope highlights<cr>", "Highlights" },
-    ["<leader>fi"] = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
-    ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
     ["<leader>fM"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
     ["<leader>fR"] = { "<cmd>Telescope registers<cr>", "Registers" },
@@ -34,10 +32,10 @@ function M.config()
 
     ["<leader>go"] = { "<cmd>Telescope git_status<cr>", "Open changed file" },
     ["<leader>gb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    ["<leader>gc"] = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+    ["<leader>gc"] = { "<cmd>Telescope git_commits<cr>", "Search Git Commit" },
     ["<leader>gC"] = {
       "<cmd>Telescope git_bcommits<cr>",
-      "Checkout commit(for current file)",
+      "Search Git Commit For Current File",
     },
 
     ["<leader>ls"] = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },

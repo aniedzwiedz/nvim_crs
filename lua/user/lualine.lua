@@ -76,11 +76,12 @@ function M.config()
       lualine_b = {
         {
           "diff",
-          symbols = {
-            -- added = icons.git.LineAdded,
-            -- modified = icons.git.LineModified,
-            -- removed = icons.git.LineRemoved,
-          },
+          -- symbols = { added = "+", modified = "~", removed = "-" }, -- Changes the symbols used by the diff.
+          -- symbols = {
+          --   added = icons.git.LineAdded,
+          --   modified = icons.git.LineModified,
+          --   removed = icons.git.LineRemoved,
+          -- },
         },
       },
       lualine_c = { "filename" },
