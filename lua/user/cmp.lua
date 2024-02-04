@@ -164,6 +164,7 @@ function M.config()
 
         vim_item.kind = icons.kind[vim_item.kind]
         vim_item.menu = ({
+          codeium = "Codeium",
           nvim_lsp = "nvim_lsp",
           nvim_lua = "nvim_lua",
           luasnip = "luasnip",

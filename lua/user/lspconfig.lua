@@ -4,6 +4,7 @@ local M = {
   dependencies = {
     {
       "folke/neodev.nvim",
+      "folke/neoconf.nvim",
     },
   },
 }
@@ -152,7 +153,13 @@ function M.config()
     end
 
     if server == "lua_ls" then
-      require("neodev").setup {}
+      require("neodev").setup {
+        settings = { Lua = {
+          completion = {
+            callSnippet = "Replace",
+          },
+        } },
+      }
     end
 
     lspconfig[server].setup(opts)

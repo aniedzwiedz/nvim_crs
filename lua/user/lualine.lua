@@ -60,20 +60,20 @@ function M.config()
       ignore_focus = { "NvimTree" },
     },
     sections = {
-      -- lualine_a = { {"branch", icon =""} },
+      lualine_a = { { "branch", icon = "" } },
       -- lualine_b = { diff },
       -- lualine_c = { "diagnostics" },
       -- lualine_x = { copilot },
       -- lualine_y = { "filetype" },
       -- lualine_z = { "progress" },
       -- lualine_a = { "mode" },
-      lualine_a = {},
+      -- lualine_a = {},
       -- lualine_a = { "FugitiveHead" },
 
-      lualine_b = { { "FugitiveHead", icon = { "", align = "right" } } },
+      -- lualine_b = { { "FugitiveHead", icon = { "", align = "right" } } },
       -- lualine_c = { diagnostics },
       -- lualine_c = { diff },
-      lualine_c = {
+      lualine_b = {
         {
           "diff",
           symbols = {
@@ -83,10 +83,11 @@ function M.config()
           },
         },
       },
+      lualine_c = { "filename" },
 
       -- lualine_x = { diff, "copilot", filetype },
       lualine_x = {
-        "copilot",
+        -- "copilot",
         diagnostics,
         { "filetype", separator = " ", padding = { left = 1, right = 0 } },
       },
